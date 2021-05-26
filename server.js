@@ -5,6 +5,7 @@ const { response } = require("express");
 //load the 'express' module which makes writing webservers easy
 const express = require("express");
 const app = express();
+const lodash = require("lodash");
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
@@ -29,7 +30,8 @@ app.get("/quotes", (req, res) => {
 });
 
 app.get("/quotes/random", (req, res) => {
-  res.send(pickFromArray(quotes));
+  res.send(lodash.sample(quotes));
+  // res.send(pickFromArray(quotes));
 });
 
 app.get("/quotes/search", (req, res) => {
