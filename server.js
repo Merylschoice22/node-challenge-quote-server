@@ -20,10 +20,29 @@ app.get("/", function (request, response) {
 //START OF YOUR CODE...
 app.get("/quotes", (req, res) => {
   res.send(quotes);
+  //Testing code//
+  // let print = [];
+  // quotes.forEach((q) => {
+  //   print.push(q.author);
+  // });
+  // res.send(print);
 });
 
 app.get("/quotes/random", (req, res) => {
   res.send(pickFromArray(quotes));
+});
+
+app.get("/quotes/search", (req, res) => {
+  const term = req.query.term.toLowerCase();
+  // res.send(quotes[0].quote);
+  let searchQuote = [];
+  quotes.forEach((q) => {
+    if (q.quote.toLowerCase().includes(term)) {
+      searchQuote.push(q);
+    }
+  });
+
+  res.send(searchQuote);
 });
 
 //...END OF YOUR CODE
