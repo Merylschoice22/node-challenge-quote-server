@@ -6,6 +6,7 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 const lodash = require("lodash");
+const cors = require("cors");
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
@@ -14,6 +15,9 @@ const quotes = require("./quotes.json");
 //   /                  - Return some helpful welcome info (text)
 //   /quotes            - Should return all quotes (json)
 //   /quotes/random     - Should return ONE quote (json)
+
+app.use(cors());
+
 app.get("/", function (request, response) {
   response.send("Neill's Quote Server!  Ask me for /quotes/random, or /quotes");
 });
