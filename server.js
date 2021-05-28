@@ -38,34 +38,34 @@ app.get("/quotes/random", (req, res) => {
   // res.send(pickFromArray(quotes));
 });
 
-app.get("/quotes/search", (req, res) => {
-  const term = req.query.term.toLowerCase();
-  // res.send(quotes[0].quote);
-  let searchQuote = [];
-  quotes.forEach((q) => {
-    if (q.quote.toLowerCase().includes(term)) {
-      searchQuote.push(q);
-    }
-  });
-
-  res.send(searchQuote);
-});
-
-/** FILTER **/
 // app.get("/quotes/search", (req, res) => {
 //   const term = req.query.term.toLowerCase();
 //   // res.send(quotes[0].quote);
-//   const filteredQuotes = (quoteArray, term) => {
-//     const newArray = quoteArray.filter((q) => {
-//       if (q.quote.toLowerCase().includes(term)) {
-//         return q.quote;
-//       }
-//     });
-//     return newArray;
-//   };
+//   let searchQuote = [];
+//   quotes.forEach((q) => {
+//     if (q.quote.toLowerCase().includes(term)) {
+//       searchQuote.push(q);
+//     }
+//   });
 
-//   res.send(filteredQuotes(quotes, term));
+//   res.send(searchQuote);
 // });
+
+/** FILTER **/
+app.get("/quotes/search", (req, res) => {
+  const term = req.query.term.toLowerCase();
+  // res.send(quotes[0].quote);
+  const filteredQuotes = (quoteArray, term) => {
+    const newArray = quoteArray.filter((q) => {
+      if (q.quote.toLowerCase().includes(term)) {
+        return q.quote;
+      }
+    });
+    return newArray;
+  };
+
+  res.send(filteredQuotes(quotes, term));
+});
 
 //...END OF YOUR CODE
 
