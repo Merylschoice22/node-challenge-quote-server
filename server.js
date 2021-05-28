@@ -51,6 +51,22 @@ app.get("/quotes/search", (req, res) => {
   res.send(searchQuote);
 });
 
+/** FILTER **/
+// app.get("/quotes/search", (req, res) => {
+//   const term = req.query.term.toLowerCase();
+//   // res.send(quotes[0].quote);
+//   const filteredQuotes = (quoteArray, term) => {
+//     const newArray = quoteArray.filter((q) => {
+//       if (q.quote.toLowerCase().includes(term)) {
+//         return q.quote;
+//       }
+//     });
+//     return newArray;
+//   };
+
+//   res.send(filteredQuotes(quotes, term));
+// });
+
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
