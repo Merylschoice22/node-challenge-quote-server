@@ -23,6 +23,7 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+////GET - Read all quotes
 app.get("/quotes", (req, res) => {
   res.send(quotes);
   //Testing code//
@@ -31,6 +32,63 @@ app.get("/quotes", (req, res) => {
   //   print.push(q.author);
   // });
   // res.send(print);
+});
+
+////GET - Read a single quote object (by its position in the array)
+//Hard coded example
+// app.get("/quotes/5", (req, res) => {
+//   res.send(quotes[4]);
+// });
+
+app.get("/quotes/:id", (req, res) => {
+  const index = parseInt(req.params.id) - 1;
+  const quoteObj = quotes[index];
+  if (quoteObj) {
+    res.send(quoteObj);
+  }
+  res.status(404).send();
+});
+
+////POST - Create a new quotes (add it to the end of the array)
+
+app.post("/quotes", (req, res) => {
+  //get the new quote object
+  const quoteObj = {
+    quote: req.query.quote,
+    author: req.query.author,
+  };
+  //add it to the quotes array
+  quotes.push(quoteObj);
+  // return the ID for the new quote object
+  res.status(201).send({ id: quotes.length });
+});
+
+////PUT - Update an existing quote
+app.put("/quotes/:id", (req, res) => {
+  //get the new quote object
+  const quoteObj = {
+    quote: req.query.quote,
+    author: req.query.author,
+  };
+  //get the ID of the existing quote object
+  const index = parseInt(req.params.id) - 1;
+  //replace existing quote object at specified index with new one
+  const result = quotes.splice(index, 1, quoteObj);
+  console.log("Removed quote: ", result);
+
+  //return new quote object
+  res.send(quoteObj);
+});
+
+////DELETE - Delete an existing quote from the array
+
+app.delete("/quotes/:id", (req, res) => {
+  //get the index of existing quote object
+  const index = parseInt(req.params.id) - 1;
+  // remove quote object at index from array, replace it with 'undefined' so that we don't shift the index of every other item in the array
+  const result = quotes.splice(index, 1, undefined);
+  // return status 200 - okay
+  res.stats(204).send();
 });
 
 app.get("/quotes/random", (req, res) => {
